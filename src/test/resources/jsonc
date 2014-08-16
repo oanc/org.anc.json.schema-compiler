@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Startup script for the LAPPS JSON schema compiler. Change the jsonc installation directory
+# below if needed.
+#
+MEMSIZE=4G
+VERSION=__VERSION__
+JAR=$HOME/bin/jsonc-$VERSION.jar
+
+java -jar $JAR $@
