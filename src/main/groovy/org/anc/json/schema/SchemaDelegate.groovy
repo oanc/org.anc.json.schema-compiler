@@ -1,6 +1,8 @@
 package org.anc.json.schema
 
 /**
+ * This class is not used and is intended for future development.
+ * 
  * @author Keith Suderman
  */
 class SchemaDelegate {
