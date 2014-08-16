@@ -17,21 +17,21 @@ class SchemaCompiler {
     Binding bindings = new Binding()
     Map contents = [:]
 
-    void compile(File file, args) {
+    String compile(File file, args) {
         parentDir = file.parentFile
-        compile(file.text, args)
+        return compile(file.text, args)
     }
 
-    void compile(File file) {
+    String compile(File file) {
         parentDir = file.parentFile
-        compile(file.text, null)
+        return compile(file.text, null)
     }
 
-    void compile(String source) {
-        compile(source, null)
+    String compile(String source) {
+        return compile(source, null)
     }
 
-    void compile(String scriptString, args) {
+    String compile(String scriptString, args) {
         ClassLoader loader = getLoader()
         CompilerConfiguration configuration = getCompilerConfiguration()
         GroovyShell shell = new GroovyShell(loader, bindings, configuration)
@@ -81,9 +81,7 @@ class SchemaCompiler {
 //        println json
 //        println JsonOutput.prettyPrint(json)
 //        println "Using JsonBuilder"
-        def builder = new JsonBuilder(contents)
-        println builder.toPrettyString()
-        println builder.toString()
+        return new JsonBuilder(contents).toPrettyString()
     }
 
     ClassLoader getLoader() {
@@ -187,17 +185,18 @@ class SchemaCompiler {
         return meta
     }
 
-    static void main(args) {
-        if (args.size() == 0) {
-            println """
+    static void usage() {
+        println """
 USAGE
 
-java -jar jsonc-${Version.version}.jar /path/to/schema"
-
-Specifying the -groovy flag will cause the GroovyTemplateEngine to be
-used. Otherwise the MarkupBuilderTemplateEngine will be used.
+java -jar jsonc-${Version.version}.jar /path/to/input /path/to/output/file"
 
 """
+    }
+
+    static void main(args) {
+        if (args.size() == 0) {
+            usage()
             return
         }
 
@@ -208,13 +207,16 @@ used. Otherwise the MarkupBuilderTemplateEngine will be used.
             println()
             return
         }
-        else {
-            def argv = null
-            if (args.size() > 1) {
-                argv = args[1..-1]
-            }
-            new SchemaCompiler().run(new File(args[0]), argv)
+        else if (args.size() != 2) {
+            usage()
+            return
         }
+        def argv = null
+        if (args.size() > 2) {
+            argv = args[2..-1]
+        }
+        String json = new SchemaCompiler().compile(new File(args[0]), argv)
+        new File(args[1]).text = json
     }
 
 }

@@ -25,20 +25,8 @@ class TestCompiler {
     }
 
     @Ignore
-    void test0() {
-        compiler.compile "println 'Hello world.'"
-    }
-
-    @Ignore
-    void argsTest() {
-        compiler.compile """
-        println args.size()
-"""
-    }
-
-    @Ignore
     void titleTest() {
-        compiler.compile """
+        println compiler.compile """
         title "This is the title"
         schema "http://www.anc.org"
 """
@@ -46,7 +34,7 @@ class TestCompiler {
 
     @Ignore
     void typeTest() {
-        compiler.compile """
+        println compiler.compile """
         title "This is the title"
         '\$schema' "http://www.anc.org"
         type object, array
@@ -56,7 +44,7 @@ class TestCompiler {
 
     @Ignore
     void nestedTest() {
-        compiler.compile """
+        println compiler.compile """
 title "This is a test"
 definitions {
     context {
@@ -69,7 +57,7 @@ definitions {
 
     @Ignore
     void lappsTest() {
-        compiler.compile """
+        println compiler.compile """
 title "LAPPS Interchange Format"
 description "Data structures exchanged by LAPPS web services."
 type object
@@ -101,7 +89,7 @@ properties {
 
     @Ignore
     void refTest() {
-        compiler.compile """
+        println compiler.compile """
 title "Reference test."
 definitions {
     common {
@@ -124,19 +112,19 @@ definitions {
             loader = this.class.classLoader
         }
         URL url = loader.getResource('jsonld-schema.schema')
-        compiler.compile url.text
+        println compiler.compile(url.text)
     }
 
     @Ignore
     void testLif() {
         File file = new File('/Users/suderman/Projects/LAPPS/json/lif.schema')
-        compiler.compile file.text
+        println compiler.compile(file.text)
     }
 
     @Test
     void testServiceMetadata() {
         File file = new File('/Users/suderman/Projects/LAPPS/json/service-metadata.schema')
-        compiler.compile file.text
+        println compiler.compile(file.text)
     }
 
 //    ClassLoader getLoader() {
