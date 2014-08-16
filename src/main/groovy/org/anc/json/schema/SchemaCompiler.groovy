@@ -1,10 +1,26 @@
+/*-
+ * Copyright 2014 The American National Corpus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package org.anc.json.schema
 
 import groovy.json.JsonBuilder
-import org.anc.lapps.json.schema.Version
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import groovy.util.logging.Slf4j
+
 /**
  * @author Keith Suderman
  */
@@ -53,6 +69,11 @@ class SchemaCompiler {
             script.binding.setVariable("args", [:])
         }
         ["object", "string", "array", "number", "boolean", "integer", "null"].each { script.binding.setVariable(it, it) }
+        script.binding.with {
+            setVariable "nil", "null"
+//            setVariable "schema", '$schema'
+//            setVariable "ref", '$ref'
+        }
         script.binding.setVariable("nil", "null")
 
 //        script.binding.setVariable("schema", "schema")
@@ -120,7 +141,7 @@ class SchemaCompiler {
 //                if (!(value instanceof UndeclaredReference)) {
 //                    throw new SchemaException("Redefinition of $name ${value.class.name}")
 //                }
-                log.info "Redefinition of {} {}", name, value.class.name
+                log.warn "Redefinition of {} {}", name, value.class.name
             }
 
             if (args == null || args.size() == 0) {
@@ -136,9 +157,15 @@ class SchemaCompiler {
                 contents[name] = cl.delegate.contents
             }
             else {
-                log.debug "Setting contents for {} to {}", name, args[0]
-                contents[name] = args[0]
-                log.info "Contents size is {}", contents.size()
+                if (args.size() == 1) {
+                    value = args[0]
+                }
+                else {
+                    value = args
+                }
+                log.debug "Setting contents for {} to {}", name, value
+                contents[name] = value
+                log.debug "Contents size is {}", contents.size()
             }
             //println "Missing method $name"
         }
@@ -207,7 +234,7 @@ java -jar jsonc-${Version.version}.jar /path/to/input /path/to/output/file"
             println()
             return
         }
-        else if (args.size() != 2) {
+        else if (args.size() < 2) {
             usage()
             return
         }

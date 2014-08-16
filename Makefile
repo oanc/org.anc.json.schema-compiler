@@ -14,10 +14,13 @@ help:
 	@echo
 	
 jar:
-	mvn package
+	mvn $(mode) package
 	
 clean:
-	mvn clean
+	mvn $(mode) clean
+	
+test:
+	@echo "Offline mode: $(mode)"
 	
 install:
 	#cp target/lsd-$(VERSION).jar $(HOME)/bin
