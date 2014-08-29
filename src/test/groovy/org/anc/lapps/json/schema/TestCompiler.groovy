@@ -5,7 +5,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-
+import static org.junit.Assert.*
 
 /**
  * @author Keith Suderman
@@ -123,7 +123,7 @@ definitions {
 
     @Test
     void testServiceMetadata() {
-        File file = new File('/Users/suderman/Projects/LAPPS/json/service-metadata.schema')
+        File file = new File('/Users/suderman/Projects/LAPPS/json/metadata.schema')
         println compiler.compile(file.text)
     }
 
