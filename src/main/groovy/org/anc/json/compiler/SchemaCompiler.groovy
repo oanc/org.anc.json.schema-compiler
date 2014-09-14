@@ -80,7 +80,7 @@ class SchemaCompiler {
 
         Script script = shell.parse(scriptString)
         if (args != null && args.size() > 0) {
-            // Parse any command line arguements into a HashMap that will
+            // Parse any command line arguments into a HashMap that will
             // be passed in to the user's script.
             def params = [:]
             args.each { arg ->
@@ -100,7 +100,6 @@ class SchemaCompiler {
 //            setVariable "schema", '$schema'
 //            setVariable "ref", '$ref'
         }
-        script.binding.setVariable("nil", "null")
 
         // Add the $schema to the contents before running the script so it
         // will be the first thing listed when serializing to JSON.
@@ -110,8 +109,6 @@ class SchemaCompiler {
             }
         }
 
-
-//        script.binding.setVariable("schema", "schema")
         script.metaClass = getMetaClass(script.class, shell)
         try {
             // Running the DSL script creates the objects needed to generate the HTML
@@ -129,19 +126,6 @@ class SchemaCompiler {
             contents.stack = writer.toString()
         }
 
-//        println "Contents ${contents.size()}"
-//        contents.each { name,object ->
-//            if (object instanceof UndeclaredReference) {
-//                println "UndeclaredReference"
-//            }
-//            else {
-//                println "${name}='${object}'"
-//            }
-//        }
-//        String json = JsonOutput.toJson(contents)
-//        println json
-//        println JsonOutput.prettyPrint(json)
-//        println "Using JsonBuilder"
         if (prettyPrint) {
             return new JsonBuilder(contents).toPrettyString()
         }
@@ -183,9 +167,6 @@ class SchemaCompiler {
             log.info "Missing method {}", name
             def value = contents[name]
             if (value != null) {
-//                if (!(value instanceof UndeclaredReference)) {
-//                    throw new SchemaException("Redefinition of $name ${value.class.name}")
-//                }
                 log.warn "Redefinition of {} {}", name, value
             }
 
@@ -193,7 +174,6 @@ class SchemaCompiler {
                 throw new SchemaException("No parameters passed to ${name}.")
             }
             if ((args[0] instanceof Closure)) {
-//                throw new SchemaException("Parameter to ${name} must be a Closure.")
                 log.debug "Running closure()"
                 Closure cl = (Closure) args[0]
                 cl.delegate = new MethodDelegate(bindings)
@@ -212,7 +192,6 @@ class SchemaCompiler {
                 contents[name] = value
                 log.debug "Contents size is {}", contents.size()
             }
-            //println "Missing method $name"
         }
         meta.required = { args ->
             if (args instanceof List) {
@@ -264,15 +243,6 @@ class SchemaCompiler {
 
         meta.initialize()
         return meta
-    }
-
-    static void usage() {
-        println """
-USAGE
-
-java -jar jsonc-${Version.version}.jar /path/to/input /path/to/output/file"
-
-"""
     }
 
     static void main(args) {
