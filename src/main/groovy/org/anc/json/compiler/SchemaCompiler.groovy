@@ -97,8 +97,8 @@ class SchemaCompiler {
         ["object", "string", "array", "number", "boolean", "integer", "null"].each { script.binding.setVariable(it, it) }
         script.binding.with {
             setVariable "nil", "null"
-//            setVariable "schema", '$schema'
-//            setVariable "ref", '$ref'
+            setVariable "schema", '$schema'
+            setVariable "ref", '$ref'
         }
 
         // Add the $schema to the contents before running the script so it
