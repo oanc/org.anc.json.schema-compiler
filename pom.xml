@@ -8,10 +8,10 @@
         <artifactId>groovy-parent-pom</artifactId>
         <version>1.1.0</version>
     </parent>
-    <groupId>org.anc.lapps.json</groupId>
-    <artifactId>schema-compiler</artifactId>
+    <groupId>org.anc.json</groupId>
+    <artifactId>compiler</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>JSON-LD Schema Compiler</name>
+    <name>JSON Schema Compiler</name>
     <packaging>jar</packaging>
     <properties>
         <groovy.version>2.2.0</groovy.version>
@@ -25,7 +25,7 @@
                 <artifactId>anc-maven-plugin</artifactId>
                 <version>1.0.6</version>
                 <configuration>
-                    <package>org.anc.json.schema</package>
+                    <package>org.anc.json.compiler</package>
                     <source>src/main</source>
                 </configuration>
                 <executions>
@@ -65,7 +65,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.anc.json.schema.SchemaCompiler</mainClass>
+                            <mainClass>org.anc.json.compiler.SchemaCompiler</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -84,10 +84,16 @@
             <version>${ivy.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
             <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
