@@ -9,14 +9,21 @@ The LAPPS (Language Application Grid) Schema compiler generates a
 syntax is **not** a new schema language, it is simply a simplified syntax for 
 representing the objects that make up a JSON schema.
 
+## Examples
+
+Example schemata can be found at:
+
+1. [http://vocab.lappsgrid.org/schema/lif.schema](http://vocab.lappsgrid.org/schema/lif.schema)
+1. [http://vocab.lappsgrid.org/schema/metadata.schema](http://vocab.lappsgrid.org/schema/metadata.schema)
+
 # Alternate Syntax
 
-A schema using the alternate syntax is really just a [Groovy](http://groovy.codehaus.org)  script a basic 
-understanding of the Groovy language is recommended, but not required. The same set 
-of keywords and constructs is used so the alternate syntax looks almost exactly the 
-same as the Javascript version; except with far fewer double quotes, colons, and braces.
+Since a schema using the alternate syntax is really just a [Groovy](http://groovy.codehaus.org) script a basic 
+understanding of the Groovy language is recommended, but not required. 
 
-Please refer to the [JSON Schema specification](http://json-schema.org) for a description
+The same set of JSON Schema keywords and constructs is used so the alternate syntax looks 
+almost exactly the same as the Javascript version; except with far fewer double 
+quotes, colons, and braces. Please refer to the [JSON Schema specification](http://json-schema.org) for a description
 of the JSON Schema syntax.
 
 ### Built in variables
