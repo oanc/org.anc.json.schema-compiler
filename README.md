@@ -6,18 +6,18 @@ downright false information...
 
 The LAPPS (Language Application Grid) Schema compiler generates a 
 [JSON Schema](http://json-schema.org) from the LAPPS alternate syntax. The alternate
-syntax is **not** a new schema language, it is simply a different syntax for 
+syntax is **not** a new schema language, it is simply a simplified syntax for 
 representing the objects that make up a JSON schema.
-
-Since a schema using the alternate syntax is really just a [Groovy](http://groovy.codehaus.org)  script a basic 
-understanding of the Groovy language is recommended, but not required.
 
 # Alternate Syntax
 
-The LAPPS alternate syntax is a Groovy DSL used to represent the objects that make up a
- JSON schema. The same set of keywords and constructs 
- is used so the alternate syntax looks almost exactly the same as the Javascript
- version; except with far fewer double quotes, colons, and braces.
+A schema using the alternate syntax is really just a [Groovy](http://groovy.codehaus.org)  script a basic 
+understanding of the Groovy language is recommended, but not required. The same set 
+of keywords and constructs is used so the alternate syntax looks almost exactly the 
+same as the Javascript version; except with far fewer double quotes, colons, and braces.
+
+Please refer to the [JSON Schema specification](http://json-schema.org) for a description
+of the JSON Schema syntax.
 
 ### Built in variables
 
@@ -93,7 +93,19 @@ array object
 This is equivalent to the Javascript
 
     "type":["object", "string", "number"]
+ 
+To create an array with containing a single element the array syntax must be used 
+explicitly. In addition, since the Groovy parser will attempt to parse 
+
+    type [ object ]
     
+as an array access we also need to include the array in parenthesis:
+
+    type([ object ])
+    
+The exception to this is the *required* keyword, which will always parse the value
+as an array regardless of the number of items in the list.
+
 ## JSON Values
 
 JSON values are represented in exactly the same way as they are in Javascript.
@@ -170,7 +182,10 @@ This generates the schema:
             }
         }
     }
-    
+
+**Groovy Note** The variable *it* is the default name used by Groovy when passing
+parameters to closures.
+
 ## Imports and @Grab
 
 Give examples that import other Groovy/Java modules and use @Grab to fetch a 
