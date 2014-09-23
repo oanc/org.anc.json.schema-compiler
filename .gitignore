@@ -5,4 +5,4 @@ pom.xml.next
 release.properties
 *.iml
 VERSION
-src/main/java/org/anc/json/schema/Version.java
+src/main/java/org/anc/json/compiler/Version.java

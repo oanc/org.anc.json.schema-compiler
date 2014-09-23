@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.anc.json</groupId>
     <artifactId>compiler</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>JSON Schema Compiler</name>
     <packaging>jar</packaging>
     <properties>
