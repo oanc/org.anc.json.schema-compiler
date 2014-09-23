@@ -115,15 +115,17 @@ class SchemaCompiler {
             script.run()
         }
         catch (Exception e) {
-            println()
-            println "Script execution threw an exception:"
-            e.printStackTrace()
-            println()
-            StringWriter writer = new StringWriter()
-            PrintWriter pwriter = new PrintWriter(writer)
-            e.printStackTrace(pwriter)
+//            println()
+//            println "Script execution threw an exception:"
+//            e.printStackTrace()
+//            println()
+//            StringWriter writer = new StringWriter()
+//            PrintWriter pwriter = new PrintWriter(writer)
+//            e.printStackTrace(pwriter)
+//            contents.error = e.getMessage()
+//            contents.stack = writer.toString()
+            contents = [:]
             contents.error = e.getMessage()
-            contents.stack = writer.toString()
         }
 
         if (prettyPrint) {
