@@ -17,7 +17,6 @@
 package org.anc.json.compiler
 
 import groovy.json.JsonBuilder
-import org.anc.json.compiler.Version
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import groovy.util.logging.Slf4j
@@ -245,59 +244,6 @@ class SchemaCompiler {
 
         meta.initialize()
         return meta
-    }
-
-    static void main(args) {
-        def cli = new CliBuilder()
-        cli.usage = "java -jar jsonc-${Version.version}.jar -[vph] [-d <3|4>] -i <input-file> [-o <output-file>]"
-        cli.header = """
-Generates the JSON representation of a LAPPS schema.
-
-"""
-        cli.footer = """
-If no output file is provided the generated schema will be
-written to System.out.
-
-"""
-        cli.v(longOpt:'version', 'displays the version number.')
-        cli.h(longOpt:'help', 'displays this help message.')
-        cli.i(longOpt:'input', args:1, 'the LAPPS schema file.')
-        cli.o(longOpt:'output', args:1, 'the JSON file to be written.')
-        cli.p(longOpt:'pretty', 'pretty print the generated schema.')
-        cli.d(longOpt:'draft', args:1, 'draft version number to be injected into $schema')
-
-        def params = cli.parse(args)
-        if (!params) {
-            return
-        }
-        if (params.h) {
-            cli.usage()
-            return
-        }
-        if (params.v) {
-            println()
-            println "LAPPS JSON Schema Compiler v${Version.version}"
-            println "Copyright 2014 American National Corpus."
-            println()
-            return
-        }
-
-        SchemaCompiler compiler = new SchemaCompiler()
-        if (params.p) {
-            compiler.prettyPrint = true
-        }
-        if (params.d) {
-            compiler.draftVersion = params.d as int
-        }
-
-        String json = compiler.compile(new File(params.i), null)
-        if (params.o) {
-            new File(params.o).text = json
-        }
-        else {
-            println json
-        }
-
     }
 
 }
