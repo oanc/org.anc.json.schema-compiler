@@ -5,9 +5,8 @@ LAPPS Schema Compiler
 downright false information...
 
 ### Build Status
-
-[![Master build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.lapps.schema-compiler?branch=master)](https://travis-ci/oanc/org.anc.lapps.schema-compiler)
-[![Develop build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.lapps.schema-compiler?branch=develop)](https://travis-ci/oanc/org.anc.lapps.schema-compiler)
+[![Master build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=master)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
+[![Develop build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=develop)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
 
 
 The LAPPS (Language Application Grid) Schema compiler generates a
