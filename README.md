@@ -4,7 +4,13 @@ LAPPS Schema Compiler
 **NOTE** This is still a work in progress and likely contains misleading and/or
 downright false information...
 
-The LAPPS (Language Application Grid) Schema compiler generates a 
+### Build Status
+
+[![Master build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.lapps.schema-compiler?branch=master)](https://travis-ci/oanc/org.anc.lapps.schema-compiler)
+[![Develop build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.lapps.schema-compiler?branch=develop)](https://travis-ci/oanc/org.anc.lapps.schema-compiler)
+
+
+The LAPPS (Language Application Grid) Schema compiler generates a
 [JSON Schema](http://json-schema.org) from the LAPPS alternate syntax. The alternate
 syntax is **not** a new schema language, it is simply a simplified syntax for 
 representing the objects that make up a JSON schema.
