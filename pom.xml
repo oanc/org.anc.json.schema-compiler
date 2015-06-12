@@ -39,6 +39,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -57,11 +58,6 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <!--
-                    <descriptors>
-                        <descritor>src/main/assembly/assembly.xml</descritor>
-                    </descriptors>
-                    -->
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
@@ -70,6 +66,7 @@
                     </archive>
                 </configuration>
             </plugin>
+            -->
         </plugins>
     </build>
     <dependencies>
