@@ -6,3 +6,4 @@ release.properties
 *.iml
 VERSION
 src/main/java/org/anc/json/compiler/Version.java
+Version.java
