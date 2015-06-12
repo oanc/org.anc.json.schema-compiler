@@ -6,7 +6,7 @@ package org.anc.json.compiler;
  */
 public final class Version
 {
-	private static final String version = "1.1.0";
+	private static final String version = "1.2.0-SNAPSHOT";
 
 	public static String getVersion() { return version; }
 }
