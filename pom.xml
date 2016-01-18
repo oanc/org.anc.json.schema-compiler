@@ -6,13 +6,34 @@
     <parent>
         <groupId>org.anc.maven</groupId>
         <artifactId>groovy-parent-pom</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
     </parent>
     <groupId>org.anc.json</groupId>
     <artifactId>compiler</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <name>JSON Schema Compiler</name>
+    <description>Generates JSON schema from a simplified Groovy DSL syntax.</description>
     <packaging>jar</packaging>
+    <url>https://github.com/oanc/org.anc.json.schema-compiler</url>
+    <scm>
+        <url>https://github.com/oanc/org.anc.json.schema-compiler</url>
+        <connection>scm:git:https://github.com/oanc/org.anc.json.schema-compiler.git</connection>
+        <developerConnection>scm:git:https://github.com/oanc/org.anc.json.schema-compiler.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <url>https://github.com/oanc/org.anc.json.schema-compiler/issues</url>
+        <system>GitHub issues</system>
+    </issueManagement>
+    <organization>
+        <name>American National Corpus</name>
+        <url>http://www.anc.org</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
     <properties>
         <logback.version>1.0.11</logback.version>
     </properties>
@@ -21,7 +42,7 @@
             <plugin>
                 <groupId>org.anc.maven.plugins</groupId>
                 <artifactId>anc-maven-plugin</artifactId>
-                <version>1.0.6</version>
+                <version>1.0.7</version>
                 <configuration>
                     <package>org.anc.json.compiler</package>
                     <source>src/main</source>
