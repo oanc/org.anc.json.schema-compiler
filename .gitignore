@@ -7,3 +7,4 @@ release.properties
 VERSION
 src/main/java/org/anc/json/compiler/Version.java
 Version.java
+pom.xml.versionsBackup
