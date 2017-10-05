@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.anc.json</groupId>
     <artifactId>compiler</artifactId>
-    <version>1.2.1</version>
+    <version>1.3.0-SNAPSHOT</version>
     <name>JSON Schema Compiler</name>
     <description>Generates JSON schema from a simplified Groovy DSL syntax.</description>
     <packaging>jar</packaging>
