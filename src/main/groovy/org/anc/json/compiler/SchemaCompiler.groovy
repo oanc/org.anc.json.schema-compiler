@@ -21,7 +21,6 @@ import groovy.xml.MarkupBuilder
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import groovy.util.logging.Slf4j
-import sun.jvm.hotspot.oops.Mark
 
 /**
  * @author Keith Suderman
