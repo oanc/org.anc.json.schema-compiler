@@ -8,11 +8,22 @@ downright false information...
 [![Master build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=master)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
 [![Develop build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=develop)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
 
-
 The LAPPS (Language Application Grid) Schema compiler generates a
 [JSON Schema](http://json-schema.org) from the LAPPS alternate syntax. The alternate
 syntax is **not** a new schema language, it is simply a simplified syntax for 
 representing the objects that make up a JSON schema.
+
+## Maven
+
+```xml
+<dependency>
+    <groupId>org.anc.json</groupId>
+    <artifactId>compiler</artifactId>
+    <version>${see below}</version>
+</dependency>
+```
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.anc.json/compiler/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.anc.json/compiler)
 
 ## Examples
 

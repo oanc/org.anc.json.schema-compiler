@@ -33,6 +33,7 @@ class TestCompiler {
         return new JsonSlurper().parseText(json)
     }
 
+
     @Test
     void titleTest() {
         def object = compile """
@@ -132,6 +133,24 @@ required 'name', 'age'
         println json
         println JsonOutput.prettyPrint(json)
     }
+
+    @Test
+    void writeXml() {
+        def source = """
+document {
+    type object
+    properties {
+        name { type string }
+        age { type integer }
+    }
+    required 'name', 'age'
+}
+"""
+        compiler.format = SchemaCompiler.Format.xml
+        String xml = compiler.compile(source)
+        println xml
+    }
+
 
 }
 
