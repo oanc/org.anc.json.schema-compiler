@@ -262,9 +262,9 @@ class SchemaCompiler {
 
 
             // Parse and run the script.
-            Script included = shell.parse(file)
-            included.metaClass = getMetaClass(included.class, shell)
-            included.run()
+            Script script = shell.parse(file)
+            script.metaClass = getMetaClass(script.class, shell)
+            script.run()
         }
 
 
