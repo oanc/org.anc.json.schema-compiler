@@ -4,6 +4,9 @@ pom.xml.releaseBackup
 pom.xml.next
 release.properties
 *.iml
+*.ipr
+*.iws
+.idea/
 VERSION
 src/main/java/org/anc/json/compiler/Version.java
 Version.java
