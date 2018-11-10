@@ -16,6 +16,8 @@
  */
 package org.anc.json.compiler
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import groovy.json.JsonBuilder
 import groovy.xml.MarkupBuilder
 import org.codehaus.groovy.control.CompilerConfiguration
@@ -27,7 +29,7 @@ import groovy.util.logging.Slf4j
  */
 @Slf4j
 class SchemaCompiler {
-    enum Format { json, xml }
+    enum Format { json, xml, yaml }
 
     /** Default file extension for LAPPS schema files. */
     static final String EXTENSION = ".schema"
@@ -131,6 +133,9 @@ class SchemaCompiler {
                 return new JsonBuilder(contents).toString()
             }
         }
+        else if (format == Format.yaml) {
+            return asYaml(contents)
+        }
         else {
             StringWriter writer = new StringWriter()
             MarkupBuilder builder = new MarkupBuilder(writer)
@@ -161,6 +166,14 @@ class SchemaCompiler {
         }
     }
 
+    String asYaml(Map contents) {
+        YAMLFactory factory = new YAMLFactory()
+        ObjectMapper mapper = new ObjectMapper(factory)
+        StringWriter writer = new StringWriter()
+        mapper.writeValue(writer, contents)
+        return writer.toString()
+    }
+    
     ClassLoader getLoader() {
         ClassLoader loader = Thread.currentThread().contextClassLoader;
         if (loader == null) {
