@@ -16,7 +16,10 @@
  */
 package org.anc.json.compiler
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import groovy.json.JsonBuilder
+import groovy.xml.MarkupBuilder
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import groovy.util.logging.Slf4j
@@ -26,6 +29,8 @@ import groovy.util.logging.Slf4j
  */
 @Slf4j
 class SchemaCompiler {
+    enum Format { json, xml, yaml }
+
     /** Default file extension for LAPPS schema files. */
     static final String EXTENSION = ".schema"
 
@@ -49,6 +54,8 @@ class SchemaCompiler {
      *  generated JSON will be compacted.
      */
     boolean prettyPrint = false
+
+    Format format = Format.json
 
     /** The draft version number to use when injecting the schema URI
      *  into the $schema field of the JSON schema.
@@ -114,27 +121,59 @@ class SchemaCompiler {
             script.run()
         }
         catch (Exception e) {
-//            println()
-//            println "Script execution threw an exception:"
-//            e.printStackTrace()
-//            println()
-//            StringWriter writer = new StringWriter()
-//            PrintWriter pwriter = new PrintWriter(writer)
-//            e.printStackTrace(pwriter)
-//            contents.error = e.getMessage()
-//            contents.stack = writer.toString()
             contents = [:]
             contents.error = e.getMessage()
         }
 
-        if (prettyPrint) {
-            return new JsonBuilder(contents).toPrettyString()
+        if (format == Format.json) {
+            if (prettyPrint) {
+                return new JsonBuilder(contents).toPrettyString()
+            }
+            else {
+                return new JsonBuilder(contents).toString()
+            }
+        }
+        else if (format == Format.yaml) {
+            return asYaml(contents)
         }
         else {
-            return new JsonBuilder(contents).toString()
+            StringWriter writer = new StringWriter()
+            MarkupBuilder builder = new MarkupBuilder(writer)
+            build(builder, contents)
+            return writer.toString()
         }
     }
 
+    void build(MarkupBuilder builder, Map map) {
+        builder.with {
+            map.collect {k,v ->
+                "$k" { build(builder, v) }
+            }
+        }
+    }
+
+    void build(MarkupBuilder builder, Object[] list) {
+        builder.with {
+            list.each { item ->
+                li { build(builder, item) }
+            }
+        }
+    }
+
+    void build(MarkupBuilder builder, Object value) {
+        if (value) {
+            builder.with { mkp.yield(value) }
+        }
+    }
+
+    String asYaml(Map contents) {
+        YAMLFactory factory = new YAMLFactory()
+        ObjectMapper mapper = new ObjectMapper(factory)
+        StringWriter writer = new StringWriter()
+        mapper.writeValue(writer, contents)
+        return writer.toString()
+    }
+    
     ClassLoader getLoader() {
         ClassLoader loader = Thread.currentThread().contextClassLoader;
         if (loader == null) {
@@ -236,9 +275,9 @@ class SchemaCompiler {
 
 
             // Parse and run the script.
-            Script included = shell.parse(file)
-            included.metaClass = getMetaClass(included.class, shell)
-            included.run()
+            Script script = shell.parse(file)
+            script.metaClass = getMetaClass(script.class, shell)
+            script.run()
         }
 
 

@@ -8,11 +8,22 @@ downright false information...
 [![Master build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=master)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
 [![Develop build status](http://grid.anc.org:9080/travis/svg/oanc/org.anc.json.schema-compiler?branch=develop)](https://travis-ci.org/oanc/org.anc.lapps.schema-compiler)
 
-
 The LAPPS (Language Application Grid) Schema compiler generates a
 [JSON Schema](http://json-schema.org) from the LAPPS alternate syntax. The alternate
 syntax is **not** a new schema language, it is simply a simplified syntax for 
 representing the objects that make up a JSON schema.
+
+## Maven
+
+```xml
+<dependency>
+    <groupId>org.anc.json</groupId>
+    <artifactId>compiler</artifactId>
+    <version>${see below}</version>
+</dependency>
+```
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.anc.json/compiler/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.anc.json/compiler)
 
 ## Examples
 
@@ -227,52 +238,15 @@ Provide code that shows how to use the SchemaCompiler class.
     String schema = """
         type object
         properties {
-            firstName { type string; required true }
-            lastName { type string; required true }
+            firstName { type string }
+            lastName { type string }
             age {
                 type integer
                 minimum 0
             }
         }
+        required 'firstName', 'lastName'
     """
             
     SchemaCompiler compiler = new SchemaCompiler()
     println compiler.compile(schema)
-    
-## Maven Dependency
-
-    <dependency>
-        <groupId>org.anc.lapps.json</groupId>
-        <artifactId>schema-compiler</artifactId>
-        <version>${schema-compiler-version}</version>
-    </dependency>
-
-**NOTE**
-  
-These modules are not yet on Maven Central and must be retrieved
-from the ANC's Nexus repositories
-
-    <repositories>
-        ...
-        <repository>
-          <id>anc-releases</id>
-          <url>http://www.anc.org:8080/nexus/content/repositories/releases/</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <repository>
-          <id>anc-snapshots</id>
-          <url>http://www.anc.org:8080/nexus/content/repositories/snapshots/</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </snapshots>
-        </repository>
-     </repositories>
