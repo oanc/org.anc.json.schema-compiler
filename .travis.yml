@@ -3,8 +3,6 @@ branches:
     only:
         - master
         - develop
-before_install:
-    - curl -O http://www.anc.org/tools/settings.xml
 install:
     - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --settings settings.xml
 script:
