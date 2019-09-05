@@ -5,11 +5,9 @@ import groovy.json.JsonSlurper
 import org.anc.json.compiler.SchemaCompiler
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
-import static org.junit.Assert.*
-import static org.junit.Assert.assertTrue
 
+import static org.junit.Assert.assertTrue
 /**
  * @author Keith Suderman
  */
@@ -152,6 +150,23 @@ document {
     }
 
 
+    @Test
+    void readmeExample() {
+        String schema = """
+    type object
+    properties {
+        firstName { type string }
+        lastName { type string }
+        age {
+            type integer
+            minimum 0
+        }
+    }
+    required 'firstName', 'lastName'
+"""
+
+        SchemaCompiler compiler = new SchemaCompiler()
+        println compiler.compile(schema)    }
 }
 
 
